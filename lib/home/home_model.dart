@@ -1,5 +1,8 @@
 import 'dart:math';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
 
 class HomeModel extends ChangeNotifier {
   late double y = 0;
@@ -7,6 +10,9 @@ class HomeModel extends ChangeNotifier {
   late Stack canvas = Stack(
     children: dots,
   );
+
+  final recorder = ui.PictureRecorder();
+
   List<Widget> dots = [];
 
   void changeValueY(double val) {
@@ -17,8 +23,8 @@ class HomeModel extends ChangeNotifier {
     x = val;
   }
 
-  void addFrame(Widget frame) {
-    dots.add(frame);
+  void addFrame(List<Widget> frame) {
+    dots.insertAll(0, frame);
     notifyListeners();
   }
 
@@ -27,7 +33,7 @@ class HomeModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addDot(double x, double y) {
+  addDot(double x, double y) {
     final Widget dot = Align(
         alignment: Alignment(x, y),
         child: Container(
