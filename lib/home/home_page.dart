@@ -16,13 +16,7 @@ class HomePage extends StatelessWidget {
 
     final size = MediaQuery.of(context).size;
     return ChangeNotifierProvider.value(
-        value: HomeModel()
-          ..addFrame(Container(
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 204, 204, 204),
-              borderRadius: BorderRadius.circular(20),
-            ),
-          )),
+        value: HomeModel()..addFrame([]),
         child: Consumer<HomeModel>(builder: (context, model, chidl) {
           x = model.x * 0.01;
           y = model.y * -0.01;
@@ -36,79 +30,93 @@ class HomePage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Column(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: size.height * 0.72,
+                              width: size.width * 0.62,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 204, 204, 204),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                          height: size.height * 0.7,
+                          width: size.width * 0.6,
+                          child: Stack(
+                            children: [
+                              Stack(
+                                children: model.dots,
+                              ),
+                            ],
+                          )),
+                      Stack(
                         children: [
-                          SizedBox(
-                              height: size.height * 0.7,
-                              width: size.width * 0.6,
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    width: size.width * 0.6,
-                                    height: size.height * 0.7,
-                                    color:
-                                        const Color.fromARGB(255, 181, 23, 12),
-                                  ),
-                                  Stack(
-                                    children: model.dots,
-                                  ),
-                                ],
-                              )),
-                          Stack(
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Swipe A Sketch',
+                                  style: GoogleFonts.grapeNuts(fontSize: 60),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Etch A Sketch',
-                                      style:
-                                          GoogleFonts.grapeNuts(fontSize: 60),
-                                    ),
-                                  ],
+                                padding: const EdgeInsets.only(top: 30),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        const Color.fromARGB(221, 255, 191, 1),
+                                    elevation: 10,
+                                    shape: const StadiumBorder(),
+                                  ),
+                                  onPressed: () {
+                                    model.rest(Container(
+                                        decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          255, 204, 204, 204),
+                                      borderRadius: BorderRadius.circular(20),
+                                    )));
+                                  },
+                                  child: Text(
+                                    'Reset',
+                                    style: GoogleFonts.grapeNuts(
+                                        fontSize: 30,
+                                        color: Color.fromARGB(255, 0, 0, 0)),
+                                  ),
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 30),
-                                    child: TextButton(
-                                        onPressed: () {
-                                          model.rest(Container(
-                                              decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                255, 204, 204, 204),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          )));
-                                        },
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 20),
-                                          child: Text(
-                                            'Rest',
-                                            style: GoogleFonts.grapeNuts(
-                                                fontSize: 40,
-                                                color: const Color.fromARGB(
-                                                    255, 255, 156, 7)),
-                                          ),
-                                        )),
-                                  ),
-                                  const SizedBox(width: 200)
-                                ],
-                              ),
+                              const SizedBox(width: 150)
                             ],
                           ),
                         ],
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Column(
@@ -126,7 +134,7 @@ class HomePage extends StatelessWidget {
                             children: [
                               SizedBox(
                                 width: 60,
-                                height: 100,
+                                height: 200,
                                 child: WheelSpinnerTheme(
                                   data: WheelSpinnerThemeData.light().copyWith(
                                     borderRadius: BorderRadius.circular(10),
@@ -156,7 +164,7 @@ class HomePage extends StatelessWidget {
                                   Center(
                                       child: SizedBox(
                                     width: 60,
-                                    height: 100,
+                                    height: 200,
                                     child: WheelSpinnerTheme(
                                       data: WheelSpinnerThemeData.light()
                                           .copyWith(

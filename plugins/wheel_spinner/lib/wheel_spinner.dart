@@ -43,7 +43,7 @@ class WheelSpinner extends StatefulWidget {
   final ValueBuilder? childBuilder;
 
   /// The drag speed factor
-  final double _dragSpeedFactor = 1.0;
+  final double _dragSpeedFactor = 0.5;
 
   /// The theme for this wheel spinner
   final WheelSpinnerThemeData? theme;
@@ -58,7 +58,7 @@ class WheelSpinner extends StatefulWidget {
     this.onSlideDone,
     this.min = double.negativeInfinity,
     this.max = double.infinity,
-    this.value = 0.5,
+    this.value = 1.0,
     this.childBuilder,
     this.theme,
     this.childPosition,
@@ -194,7 +194,7 @@ class _WheelSpinnerState extends State<WheelSpinner>
     final newValue = clamp(
         dragStartValue -
             (details.globalPosition - dragStartOffset!).dy /
-                (20.0 / widget._dragSpeedFactor),
+                (38.0 / widget._dragSpeedFactor),
         widget.min,
         widget.max);
     setState(() => value = newValue);
